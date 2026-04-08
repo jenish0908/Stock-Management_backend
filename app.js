@@ -16,26 +16,8 @@ const inventoryRoutes = require('./routes/InventoryRoutes');
 const app = express();
 
 // Middleware
-const allowedOrigins = [
-    'https://stock-management-frontend-qnda.onrender.com',
-    'http://localhost:3000',
-    'http://localhost:3001',
-];
-
-if (process.env.FRONTEND_URL) {
-    allowedOrigins.push(process.env.FRONTEND_URL);
-}
-
 const corsOptions = {
-    origin: function (origin, callback) {
-        // Allow requests with no origin (e.g. mobile apps, curl, Postman)
-        if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) !== -1) {
-            return callback(null, true);
-        }
-        return callback(new Error('CORS: origin not allowed - ' + origin), false);
-    },
-    credentials: true,
+    origin: '*',
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
 };
