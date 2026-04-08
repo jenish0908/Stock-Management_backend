@@ -16,7 +16,14 @@ const inventoryRoutes = require('./routes/InventoryRoutes');
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(
+    cors({
+        origin: ['https://stock-management-frontend-qnda.onrender.com', 'http://localhost:3001'],
+        credentials: true,
+    }),
+);
+
+app.options('*', cors());
 app.use(bodyParser.json({ limit: '10mb' }));
 
 // Only use morgan in non-test environment
